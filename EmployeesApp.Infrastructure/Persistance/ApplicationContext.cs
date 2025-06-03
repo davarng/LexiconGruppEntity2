@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace AspNetDemo.Infrastructure.Persistance;
+namespace EmployeesApp.Infrastructure.Persistance;
 
 public class ApplicationContext(DbContextOptions<ApplicationContext> options)
     : DbContext(options)
