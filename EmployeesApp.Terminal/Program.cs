@@ -10,7 +10,7 @@ internal class Program
 {
     static EmployeeService employeeService;
 
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         string connectionString;
 
@@ -28,14 +28,16 @@ internal class Program
         var context = new ApplicationContext(options);
         employeeService = new(new EmployeeRepository(context));
 
-        ListAllEmployees();
-        ListEmployee(562);
+        await ListAllEmployees();
+        await ListEmployee(562);
     }
 
     private static async Task ListAllEmployees()
     {
-        foreach (var item in await employeeService.GetAllAsync())
-            Console.WriteLine(item.Name);
+        var employees = await employeeService.GetAllAsync();
+        
+        foreach (var item in employees)
+            Console.WriteLine(item.Name + ":  "+ item.Company?.Name );
 
         Console.WriteLine("------------------------------");
     }
@@ -47,7 +49,7 @@ internal class Program
         try
         {
             employee = await employeeService.GetByIdAsync(employeeID);
-            Console.WriteLine($"{employee?.Name}: {employee?.Email}");
+            Console.WriteLine($"{employee?.Name}: {employee?.Email} ");
             Console.WriteLine("------------------------------");
         }
         catch (ArgumentException e)
