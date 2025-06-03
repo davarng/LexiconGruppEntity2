@@ -51,7 +51,7 @@ namespace EmployeesApp.Infrastructure.Migrations
                         .HasColumnType("Money")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -78,7 +78,6 @@ namespace EmployeesApp.Infrastructure.Migrations
                         {
                             Id = 562,
                             Bonus = 0m,
-                            CompanyId = 0,
                             Email = "Anders.Hejlsberg@outlook.com",
                             Name = "Anders Hejlsberg",
                             Salary = 0m
@@ -87,7 +86,6 @@ namespace EmployeesApp.Infrastructure.Migrations
                         {
                             Id = 62,
                             Bonus = 0m,
-                            CompanyId = 0,
                             Email = "k.d@outlook.com",
                             Name = "Kathleen Dollard",
                             Salary = 0m
@@ -96,7 +94,6 @@ namespace EmployeesApp.Infrastructure.Migrations
                         {
                             Id = 15662,
                             Bonus = 0m,
-                            CompanyId = 0,
                             Email = "Admin.Torgersen@outlook.com",
                             Name = "Mads Torgersen",
                             Salary = 0m
@@ -107,9 +104,7 @@ namespace EmployeesApp.Infrastructure.Migrations
                 {
                     b.HasOne("EmployeesApp.Domain.Entities.Company", "Company")
                         .WithMany("Employees")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
                 });

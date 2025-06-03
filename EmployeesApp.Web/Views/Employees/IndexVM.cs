@@ -8,6 +8,8 @@
         {
             public required int Id { get; set; }
             public required string Name { get; set; }
+
+            public required string CompanyName { get; set; } = null!;
             public required bool ShowAsHighlighted { get; set; }
         }
     }

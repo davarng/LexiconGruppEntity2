@@ -5,7 +5,7 @@
 namespace EmployeesApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedCompanies : Migration
+    public partial class addcompanies : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,8 +14,7 @@ namespace EmployeesApp.Infrastructure.Migrations
                 name: "CompanyId",
                 table: "Employees",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Companies",
@@ -35,21 +34,21 @@ namespace EmployeesApp.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 62,
                 column: "CompanyId",
-                value: 0);
+                value: null);
 
             migrationBuilder.UpdateData(
                 table: "Employees",
                 keyColumn: "Id",
                 keyValue: 562,
                 column: "CompanyId",
-                value: 0);
+                value: null);
 
             migrationBuilder.UpdateData(
                 table: "Employees",
                 keyColumn: "Id",
                 keyValue: 15662,
                 column: "CompanyId",
-                value: 0);
+                value: null);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_CompanyId",
@@ -61,8 +60,7 @@ namespace EmployeesApp.Infrastructure.Migrations
                 table: "Employees",
                 column: "CompanyId",
                 principalTable: "Companies",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

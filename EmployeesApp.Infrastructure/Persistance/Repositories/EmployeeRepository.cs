@@ -12,8 +12,9 @@ public class EmployeeRepository(ApplicationContext context) : IEmployeeRepositor
         await context.SaveChangesAsync(); // Inte glömma!
     }
 
-    public async Task<Employee[]> GetAllAsync() => await context.Employees.ToArrayAsync();
+    public async Task<Employee[]> GetAllAsync() => await context.Employees.Include(e=>e.Company).AsNoTracking().ToArrayAsync();
 
     public async Task<Employee?> GetByIdAsync(int id) => await context.Employees
         .FindAsync(id);
+
 }

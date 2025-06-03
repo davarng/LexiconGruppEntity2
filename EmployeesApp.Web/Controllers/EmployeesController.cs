@@ -20,6 +20,7 @@ public class EmployeesController(IEmployeeService service) : Controller
             {
                 Id = e.Id,
                 Name = e.Name,
+                CompanyName = e.Company?.Name ?? "No Company",
                 ShowAsHighlighted = service.CheckIsVIP(e),
             })]
         };
