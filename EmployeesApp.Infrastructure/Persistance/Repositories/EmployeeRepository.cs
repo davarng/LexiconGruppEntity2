@@ -1,6 +1,7 @@
 ﻿using EmployeesApp.Infrastructure.Persistance;
 using EmployeesApp.Application.Employees.Interfaces;
-using EmployeesApp.Domain.Entities; 
+using EmployeesApp.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesApp.Infrastructure.Persistance.Repositories
 {
@@ -40,16 +41,16 @@ namespace EmployeesApp.Infrastructure.Persistance.Repositories
         //},
         //];
 
-        public void Add(Employee employee)
+        public async Task AddAsync(Employee employee)
         {
-            context.Employees.Add(employee);
-            context.SaveChanges(); // Inte glömma!
+            await context.Employees.AddAsync(employee);
+            await context.SaveChangesAsync(); // Inte glömma!
         }
 
         //Classic C# syntax for GetAll()
-        public Employee[] GetAll() => [.. context.Employees];
+        public async Task<Employee[]> GetAllAsync() => await context.Employees.ToArrayAsync();
 
-        public Employee? GetById(int id) => context.Employees
-            .Find(id);
+        public async Task<Employee?> GetByIdAsync(int id) => await context.Employees
+            .FindAsync(id);
     }
 }

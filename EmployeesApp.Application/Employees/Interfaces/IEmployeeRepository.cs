@@ -4,8 +4,8 @@ namespace EmployeesApp.Application.Employees.Interfaces
 {
     public interface IEmployeeRepository
     {
-        void Add(Employee employee);
-        Employee[] GetAll();
-        Employee? GetById(int id);
+        Task AddAsync(Employee employee);
+        Task<Employee[]> GetAllAsync();
+        Task<Employee?> GetByIdAsync(int id);
     }
 }
