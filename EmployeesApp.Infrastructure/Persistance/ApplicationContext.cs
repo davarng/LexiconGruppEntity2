@@ -1,20 +1,14 @@
 ﻿using EmployeesApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EmployeesApp.Infrastructure.Persistance;
 
 public class ApplicationContext(DbContextOptions<ApplicationContext> options)
     : DbContext(options)
 {
+    public DbSet<Company> Companies { get; set; } = null!;
     public DbSet<Employee> Employees { get; set; } = null!;
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

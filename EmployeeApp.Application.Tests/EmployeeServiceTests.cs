@@ -21,28 +21,28 @@ public class EmployeeServiceTests
         };
 
         // Act
-        service.Add(employee);
+        service.AddAsync(employee);
 
         // Assert
-        mockRepo.Verify(o => o.Add(It.Is<Employee>(o =>
+        mockRepo.Verify(o => o.AddAsync(It.Is<Employee>(o =>
             o.Name == "Lisa" &&
             o.Email == "lisa@ajax.com")), Times.Once);
     }
 
     [Fact]
-    public void GetById_WithValidId_ReturnsEmployee()
+    public async Task GetById_WithValidId_ReturnsEmployee()
     {
         // Arrange
         var employee = new Employee { Id = 1, Name = "Ben", Email = "dover@hotmale.com" };
         var mockRepo = new Mock<IEmployeeRepository>();
         mockRepo
-            .Setup(r => r.GetById(1))
-            .Returns(employee);
+            .Setup(r => r.GetByIdAsync(1))
+            .ReturnsAsync(employee);
 
         var service = new EmployeeService(mockRepo.Object);
 
         // Act
-        var result = service.GetById(1);
+        var result = await service.GetByIdAsync(1);
 
         // Assert
         Assert.Equal(employee, result);
@@ -54,8 +54,8 @@ public class EmployeeServiceTests
         // Arrange
         var mockRepo = new Mock<IEmployeeRepository>();
         mockRepo
-            .Setup(r => r.GetById(999))
-            .Returns((Employee?)null);
+            .Setup(r => r.GetByIdAsync(999))
+            .ReturnsAsync((Employee?)null);
 
         var service = new EmployeeService(mockRepo.Object);
 
@@ -64,7 +64,7 @@ public class EmployeeServiceTests
         //Assert.Equal("Invalid parameter value: 999 (Parameter 'id')", ex.Message);
 
         // Act
-        var result = Record.Exception(() => service.GetById(999));
+        var result = Record.ExceptionAsync(() => service.GetByIdAsync(999));
 
         // Assert
         Assert.IsType<ArgumentException>(result);

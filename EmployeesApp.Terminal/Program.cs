@@ -1,6 +1,6 @@
-﻿using EmployeesApp.Infrastructure.Persistance;
-using EmployeesApp.Application.Employees.Services;
+﻿using EmployeesApp.Application.Employees.Services;
 using EmployeesApp.Domain.Entities;
+using EmployeesApp.Infrastructure.Persistance;
 using EmployeesApp.Infrastructure.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,21 +32,21 @@ internal class Program
         ListEmployee(562);
     }
 
-    private static void ListAllEmployees()
+    private static async Task ListAllEmployees()
     {
-        foreach (var item in employeeService.GetAll())
+        foreach (var item in await employeeService.GetAllAsync())
             Console.WriteLine(item.Name);
 
         Console.WriteLine("------------------------------");
     }
 
-    private static void ListEmployee(int employeeID)
+    private static async Task ListEmployee(int employeeID)
     {
         Employee? employee;
 
         try
         {
-            employee = employeeService.GetById(employeeID);
+            employee = await employeeService.GetByIdAsync(employeeID);
             Console.WriteLine($"{employee?.Name}: {employee?.Email}");
             Console.WriteLine("------------------------------");
         }

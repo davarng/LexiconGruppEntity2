@@ -4,11 +4,11 @@ namespace EmployeesApp.Application.Employees.Interfaces;
 
 public interface IEmployeeService
 {
-    void Add(Employee employee);
+    Task AddAsync(Employee employee);
 
-    Employee[] GetAll();
+    Task<Employee[]> GetAllAsync();
 
-    Employee? GetById(int id);
+    Task<Employee?> GetByIdAsync(int id);
 
     public bool CheckIsVIP(Employee employee);
 }
