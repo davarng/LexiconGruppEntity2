@@ -1,6 +1,6 @@
-﻿using AspNetDemo.Infrastructure.Persistance;
+﻿using EmployeesApp.Infrastructure.Persistance;
 using EmployeesApp.Application.Employees.Interfaces;
-using EmployeesApp.Domain.Entities;
+using EmployeesApp.Domain.Entities; 
 
 namespace EmployeesApp.Infrastructure.Persistance.Repositories
 {
